@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Recipe - DIGI Recipe Book</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>DIGI Recipe Book</h1>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="addRecipe.html">Add Recipe</a>
+        <a href="myRecipes.html">My Recipes</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Edit Recipe</h2>
+    <form id="editRecipeForm">
+        <input type="text" id="title" placeholder="Title" required />
+        <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea>
+        <textarea id="steps" placeholder="Steps (comma separated)" required></textarea>
+        <input type="text" id="category" placeholder="Category" required />
+        <input type="text" id="image" placeholder="Image URL" />
+        <select id="isPublic">
+            <option value="true">Public</option>
+            <option value="false">Private</option>
+        </select>
+        <button type="submit">Update Recipe</button>
+    </form>
+</div>
+
+<script src="./js/auth.js"></script>
+<script src="./js/editRecipe.js"></script>
+
+</body>
+</html>

@@ -1,13 +1,13 @@
-# 🍽️ DIGI Recipe Book
+# DIGI Recipe Book
 
 A full-stack **Digital Recipe Book** web application that allows users to store, categorize, and share their favorite personal or family recipes. Built using **Node.js, Express, MongoDB** (Backend) and **HTML, CSS, JavaScript** (Frontend).
 
-🌐 **Live Frontend URL**: [https://benevolent-phoenix-c10ecb.netlify.app/register](https://benevolent-phoenix-c10ecb.netlify.app/register)  
-🌐 **Live Backend URL**: [https://recipe-backenddeploy.onrender.com](https://recipe-backenddeploy.onrender.com)
+**Live Frontend URL**: [https://benevolent-phoenix-c10ecb.netlify.app/register](https://benevolent-phoenix-c10ecb.netlify.app/register)  
+**Live Backend URL**: [https://recipe-backenddeploy.onrender.com](https://recipe-backenddeploy.onrender.com)
 
 ---
 
-## ✨ Features
+## Features
 
 - User Registration & Login (JWT Authentication)
 - Add personal or family recipes
@@ -22,7 +22,7 @@ A full-stack **Digital Recipe Book** web application that allows users to store,
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - HTML5 + CSS3 + JavaScript (Vanilla)
@@ -48,18 +48,19 @@ cd digi-recipe-book/backend
 npm install
 
 
-###Create a .env file inside the backend:
+##Create a .env file inside the backend:
+
 MONGO_URL=your_mongodb_atlas_url
 JWT_SECRET=your_jwt_secret
 PORT=5009
 
-###user Routes:
+## user Routes:
 
 POST /api/users/register — Register a new user.
 
 POST /api/users/login — Login and receive an authentication token.
 
-###Recipe Routes:
+## Recipe Routes:
 
 GET /api/recipes — Fetch all publicly shared recipes. No authentication required.
 

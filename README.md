@@ -42,7 +42,7 @@ A full-stack **Digital Recipe Book** web application that allows users to store,
 
 ### Backend Setup
 
-```bash
+bash
 git clone https://github.com/your-username/digi-recipe-book.git
 cd digi-recipe-book/backend
 npm install

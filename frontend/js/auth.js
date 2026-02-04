@@ -1,5 +1,3 @@
-const backendURL = 'https://recipe-backenddeploy.onrender.com';
-
 // Login
 if (document.getElementById('loginForm')) {
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -7,19 +5,25 @@ if (document.getElementById('loginForm')) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        const res = await fetch(`${backendURL}/api/users/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/users/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
 
-        const data = await res.json();
-        if (data.token) {
-            localStorage.setItem('token', data.token);
-            alert('Login successful!');
-            window.location.href = 'index.html';
-        } else {
-            alert(data.message);
+            const data = await res.json();
+            if (data.token) {
+                setToken(data.token);
+                showToast('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                showToast(data.message || 'Login failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('Connection error. Please try again.', 'error');
         }
     });
 }
@@ -31,28 +35,42 @@ if (document.getElementById('registerForm')) {
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-      
 
-        const res = await fetch(`${backendURL}/api/users/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
-        });
+        if (password.length < 6) {
+            showToast('Password must be at least 6 characters', 'error');
+            return;
+        }
 
-        const data = await res.json();
-        if (data.token) {
-            localStorage.setItem('token', data.token);
-            alert('Registration successful!');
-            window.location.href = 'login.html';
-        } else {
-            alert(data.message);
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/users/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password }),
+            });
+
+            const data = await res.json();
+            if (data.token) {
+                setToken(data.token);
+                showToast('Registration successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                showToast(data.message || 'Registration failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('Connection error. Please try again.', 'error');
         }
     });
 }
 
 // Logout
 function logout() {
-    localStorage.removeItem('token');
-    alert('Logged out successfully!');
-    window.location.href = 'login.html';
+    if (confirm('Are you sure you want to logout?')) {
+        clearToken();
+        showToast('Logged out successfully!', 'success');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1000);
+    }
 }

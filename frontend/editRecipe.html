@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Recipe - DIGI Recipe Book</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
 <div class="navbar">
-    <h1>DIGI Recipe Book</h1>
+    <h1>🍳 DIGI Recipe Book</h1>
     <div>
         <a href="index.html">Home</a>
         <a href="addRecipe.html">Add Recipe</a>
@@ -18,21 +19,56 @@
 </div>
 
 <div class="container">
-    <h2>Edit Recipe</h2>
     <form id="editRecipeForm">
-        <input type="text" id="title" placeholder="Title" required />
-        <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea>
-        <textarea id="steps" placeholder="Steps (comma separated)" required></textarea>
-        <input type="text" id="category" placeholder="Category" required />
-        <input type="text" id="image" placeholder="Image URL" />
-        <select id="isPublic">
-            <option value="true">Public</option>
-            <option value="false">Private</option>
-        </select>
+        <h2>Edit Recipe</h2>
+        
+        <div class="form-group">
+            <label for="title">Recipe Title</label>
+            <input type="text" id="title" placeholder="Recipe title" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" required>
+                <option value="">Select a category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverage">Beverage</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="ingredients">Ingredients</label>
+            <textarea id="ingredients" placeholder="Ingredients (comma separated)" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="steps">Cooking Steps</label>
+            <textarea id="steps" placeholder="Steps (comma separated)" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="url" id="image" placeholder="Image URL" />
+        </div>
+        
+        <div class="form-group">
+            <label for="isPublic">Visibility</label>
+            <select id="isPublic" required>
+                <option value="false">Private</option>
+                <option value="true">Public</option>
+            </select>
+        </div>
+        
         <button type="submit">Update Recipe</button>
     </form>
 </div>
 
+<div id="toastContainer"></div>
+<script src="./js/shared.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/editRecipe.js"></script>
 

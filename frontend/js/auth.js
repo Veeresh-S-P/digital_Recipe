@@ -17,7 +17,7 @@ if (document.getElementById('loginForm')) {
                 setToken(data.token);
                 showToast('Login successful! Redirecting...', 'success');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'home.html';
                 }, 1000);
             } else {
                 showToast(data.message || 'Login failed. Please try again.', 'error');
@@ -53,7 +53,7 @@ if (document.getElementById('registerForm')) {
                 setToken(data.token);
                 showToast('Registration successful! Redirecting...', 'success');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = 'home.html';
                 }, 1000);
             } else {
                 showToast(data.message || 'Registration failed. Please try again.', 'error');

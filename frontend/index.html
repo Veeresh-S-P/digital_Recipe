@@ -3,54 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGI Recipe Book</title>
+    <title>Register - DIGI Recipe Book</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
-<div class="navbar">
-    <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🍳 DIGI Recipe Book</h1></a>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="addRecipe.html">Add Recipe</a>
-        <a href="myRecipes.html">My Recipes</a>
-        <a href="myFavorites.html">My Favorites</a>
-        <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
-        <a href="#" onclick="logout()">Logout</a>
-    </div>
-</div>
-
 <div class="container">
-    <h2>Public Recipes</h2>
-    
-    <div class="search-filter">
-        <div class="search-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Search recipes by title...">
+    <form id="registerForm">
+        <h2>Get Started!</h2>
+        <p style="color: #999; margin-bottom: 30px;">Create an account to save your recipes</p>
+        
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required />
         </div>
-        <select id="categoryFilter" class="filter-select">
-            <option value="">All Categories</option>
-            <option value="Breakfast">Breakfast</option>
-            <option value="Lunch">Lunch</option>
-            <option value="Dinner">Dinner</option>
-            <option value="Snacks">Snacks</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Beverage">Beverage</option>
-        </select>
-    </div>
-    
-    <div id="recipeList" class="recipe-grid"></div>
-    <div id="emptyState" style="display: none;" class="empty-state">
-        <div class="empty-state-icon">🍽️</div>
-        <h3>No recipes found</h3>
-        <p>Try adjusting your search or filter criteria</p>
-    </div>
+        
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Create a password" required />
+        </div>
+        
+        <button type="submit">Create Account</button>
+        
+        <div class="auth-link">
+            <p>Already have an account? <a href="login.html">Sign in here</a></p>
+        </div>
+    </form>
 </div>
 
 <div id="toastContainer"></div>
 <script src="./js/shared.js"></script>
 <script src="./js/auth.js"></script>
-<script src="./js/recipes.js"></script>
-
 </body>
 </html>

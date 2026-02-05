@@ -3,7 +3,8 @@
 // ============================================
 
 // Backend URL constant
-const BACKEND_URL = 'https://recipe-backenddeploy.onrender.com';
+// Use local backend for development, remote for production
+const BACKEND_URL = 'http://localhost:5009';
 
 // ============================================
 // TOAST NOTIFICATION SYSTEM
@@ -265,6 +266,48 @@ function clearToken() {
     localStorage.removeItem('token');
 }
 
+/**
+ * Toggle favorite for a recipe
+ * @param {string} recipeId
+ * @returns {Promise<object>} { message: 'added'|'removed' }
+ */
+async function toggleFavorite(recipeId) {
+    const token = getToken();
+    if (!token) throw new Error('Not authenticated');
+    const res = await fetch(`${BACKEND_URL}/api/recipes/${recipeId}/favorite`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+    });
+    return await res.json();
+}
+
+// Global favorite handler (used on pages that include only shared.js)
+async function handleFavorite(id, btn) {
+    try {
+        const res = await toggleFavorite(id);
+        if (res.message === 'added') {
+            if (btn) btn.textContent = '❤️';
+            showToast('Added to favorites', 'success');
+        } else {
+            if (btn) btn.textContent = '♡';
+            showToast('Removed from favorites', 'info');
+            try {
+                const favList = document.getElementById('favoritesList');
+                if (favList && btn) {
+                    const card = btn.closest('.recipe-card');
+                    if (card) card.remove();
+                }
+            } catch (e) {
+                // ignore
+            }
+        }
+        return res;
+    } catch (err) {
+        showToast('Could not toggle favorite', 'error');
+        throw err;
+    }
+}
+
 // ============================================
 // DOM UTILITIES
 // ============================================
@@ -321,6 +364,68 @@ function hideElement(elementId) {
         element.style.display = 'none';
     }
 }
+
+// ============================================
+// DARK MODE UTILITIES
+// ============================================
+
+/**
+ * Initialize dark mode from localStorage
+ */
+function initDarkMode() {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
+    }
+}
+
+/**
+ * Enable dark mode
+ */
+function enableDarkMode() {
+    document.documentElement.classList.add('dark-mode');
+    localStorage.setItem('darkMode', 'true');
+    updateThemeToggle(true);
+}
+
+/**
+ * Disable dark mode
+ */
+function disableDarkMode() {
+    document.documentElement.classList.remove('dark-mode');
+    localStorage.setItem('darkMode', 'false');
+    updateThemeToggle(false);
+}
+
+/**
+ * Toggle dark mode
+ */
+function toggleDarkMode() {
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    if (isDarkMode) {
+        disableDarkMode();
+    } else {
+        enableDarkMode();
+    }
+}
+
+/**
+ * Update theme toggle button appearance
+ * @param {boolean} isDarkMode - Whether dark mode is enabled
+ */
+function updateThemeToggle(isDarkMode) {
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+        toggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
+    }
+}
+
+// Initialize dark mode on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initDarkMode();
+});
 
 // ============================================
 // NAMING CONVENTIONS

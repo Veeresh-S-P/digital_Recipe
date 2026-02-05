@@ -4,7 +4,9 @@ const {
     getPublicRecipes,
     getMyRecipes,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    toggleFavorite,
+    getFavorites,
 } = require('../controllers/recipeController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -15,6 +17,10 @@ router.route('/')
     .get(getPublicRecipes);
 
 router.route('/my').get(protect, getMyRecipes);
+
+router.route('/favorites').get(protect, getFavorites);
+
+router.route('/:id/favorite').post(protect, toggleFavorite);
 
 router.route('/:id')
     .put(protect, updateRecipe)

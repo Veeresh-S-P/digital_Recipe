@@ -27,7 +27,10 @@ async function loadRecipeData() {
         document.getElementById('ingredients').value = recipe.ingredients.join(', ');
         document.getElementById('steps').value = recipe.steps.join(', ');
         document.getElementById('image').value = recipe.image || '';
-        document.getElementById('isPublic').value = recipe.isPublic;
+            document.getElementById('isPublic').value = recipe.isPublic;
+            document.getElementById('prepTime').value = recipe.prepTime || 0;
+            document.getElementById('cookTime').value = recipe.cookTime || 0;
+            document.getElementById('difficulty').value = recipe.difficulty || 'Easy';
     } catch (error) {
         showToast('Error loading recipe', 'error');
     }
@@ -49,6 +52,9 @@ if (document.getElementById('editRecipeForm')) {
         const steps = document.getElementById('steps').value.split(',').map(s => s.trim()).filter(s => s);
         const category = document.getElementById('category').value;
         const image = document.getElementById('image').value.trim();
+        const prepTime = parseInt(document.getElementById('prepTime')?.value || '0', 10);
+        const cookTime = parseInt(document.getElementById('cookTime')?.value || '0', 10);
+        const difficulty = document.getElementById('difficulty')?.value || 'Easy';
         const isPublic = document.getElementById('isPublic').value === 'true';
 
         if (!title || ingredients.length === 0 || steps.length === 0 || !category) {

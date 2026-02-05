@@ -1,5 +1,6 @@
 
 let allMyRecipes = [];
+let myFavoriteSet = new Set();
 
 async function fetchMyRecipes() {
     const token = getToken();
@@ -16,6 +17,15 @@ async function fetchMyRecipes() {
 
         const recipes = await res.json();
         allMyRecipes = recipes;
+        // fetch user's favorites to mark hearts
+        try {
+            const favs = await apiGet('/api/recipes/favorites', token);
+            // Ensure favs is an array (handle error responses)
+            const favArray = Array.isArray(favs) ? favs : [];
+            myFavoriteSet = new Set(favArray.map(f => f._id));
+        } catch (err) {
+            console.warn('Could not load favorites', err);
+        }
         displayMyRecipes(recipes);
     } catch (error) {
         showToast('Error loading recipes', 'error');
@@ -39,13 +49,18 @@ function displayMyRecipes(recipes) {
         const recipeCard = document.createElement('div');
         recipeCard.className = 'recipe-card';
         recipeCard.id = `recipe-${r._id}`;
+        const isFav = myFavoriteSet.has(r._id);
+        const favSymbol = isFav ? '❤️' : '♡';
         recipeCard.innerHTML = `
             <img src="${r.image || 'https://via.placeholder.com/400x200?text=Recipe+Image'}" alt="${r.title}" />
             <div class="recipe-card-content">
-                <h3>${r.title}</h3>
-                <p><strong>Category:</strong> ${r.category}</p>
+                <div class="recipe-card-header">
+                    <h3>${r.title}</h3>
+                    <button class="btn-fav" onclick="handleFavorite('${r._id}', this)">${favSymbol}</button>
+                </div>
+                <p><strong>Category:</strong> ${r.category} • <strong>Difficulty:</strong> ${r.difficulty || 'Easy'}</p>
                 <p style="font-size: 12px; color: #999;">
-                    <strong>Status:</strong> ${r.isPublic ? '🌐 Public' : '🔒 Private'}
+                    <strong>Status:</strong> ${r.isPublic ? '🌐 Public' : '🔒 Private'} • <strong>Prep:</strong> ${r.prepTime || 0}m
                 </p>
                 <div class="recipe-card-actions">
                     <button class="btn-secondary" onclick="editRecipe('${r._id}')">✏️ Edit</button>

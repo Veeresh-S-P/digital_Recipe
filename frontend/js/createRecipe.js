@@ -10,6 +10,9 @@ document.getElementById('recipeForm').addEventListener('submit', async (e) => {
     const steps = document.getElementById('steps').value.split(',').map(s => s.trim()).filter(s => s);
     const category = document.getElementById('category').value;
     const image = document.getElementById('image').value.trim();
+    const prepTime = parseInt(document.getElementById('prepTime')?.value || '0', 10);
+    const cookTime = parseInt(document.getElementById('cookTime')?.value || '0', 10);
+    const difficulty = document.getElementById('difficulty')?.value || 'Easy';
     const isPublic = document.getElementById('isPublic').value === 'true';
 
     if (!title || ingredients.length === 0 || steps.length === 0 || !category) {
@@ -31,7 +34,7 @@ document.getElementById('recipeForm').addEventListener('submit', async (e) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ title, ingredients, steps, category, image, isPublic })
+            body: JSON.stringify({ title, ingredients, steps, category, image, isPublic, prepTime, cookTime, difficulty })
         });
 
         const data = await res.json();

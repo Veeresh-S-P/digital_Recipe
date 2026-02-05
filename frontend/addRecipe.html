@@ -9,11 +9,13 @@
 <body>
 
 <div class="navbar">
-    <h1>🍳 DIGI Recipe Book</h1>
+    <a href="index.html" style="text-decoration: none; color: inherit;"><h1>🍳 DIGI Recipe Book</h1></a>
     <div>
         <a href="index.html">Home</a>
         <a href="addRecipe.html">Add Recipe</a>
         <a href="myRecipes.html">My Recipes</a>
+        <a href="myFavorites.html">My Favorites</a>
+        <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
         <a href="#" onclick="logout()">Logout</a>
     </div>
 </div>
@@ -48,6 +50,25 @@
         <div class="form-group">
             <label for="steps">Cooking Steps</label>
             <textarea id="steps" placeholder="Enter cooking steps separated by commas&#10;e.g., Mix dry ingredients, Add wet ingredients, Bake at 350°F" required></textarea>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group small">
+                <label for="prepTime">Prep Time (mins)</label>
+                <input type="number" id="prepTime" min="0" placeholder="e.g., 15" />
+            </div>
+            <div class="form-group small">
+                <label for="cookTime">Cook Time (mins)</label>
+                <input type="number" id="cookTime" min="0" placeholder="e.g., 30" />
+            </div>
+            <div class="form-group small">
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
         </div>
         
         <div class="form-group">

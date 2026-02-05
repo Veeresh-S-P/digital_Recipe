@@ -153,7 +153,7 @@ digital_Recipe/
    - To use local backend, update `BACKEND_URL` in `frontend/js/shared.js` to `http://localhost:5009`
 
 **Live URLs:**
-- **Frontend**: [https://benevolent-phoenix-c10ecb.netlify.app](https://benevolent-phoenix-c10ecb.netlify.app)
+- **Frontend**: [https://digirecipe.netlify.app](https://digirecipe.netlify.app)
 - **Backend API**: [https://recipe-backenddeploy.onrender.com](https://recipe-backenddeploy.onrender.com)
 
 ## 📚 API Endpoints

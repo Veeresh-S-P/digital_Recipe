@@ -4,7 +4,7 @@
 
 // Backend URL constant
 // Use local backend for development, remote for production
-const BACKEND_URL = 'http://localhost:5009';
+const BACKEND_URL = 'https://recipe-backenddeploy.onrender.com';
 
 // ============================================
 // TOAST NOTIFICATION SYSTEM

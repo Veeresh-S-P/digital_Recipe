@@ -148,8 +148,13 @@ digital_Recipe/
    - Or use any local web server
 
 2. **Backend URL Configuration:**
-   - Frontend is configured to use `http://localhost:5009`
-   - Update `BACKEND_URL` in `frontend/js/shared.js` if deploying to different server
+   - Frontend is configured to use the deployed backend: `https://recipe-backenddeploy.onrender.com`
+   - All API calls automatically go to the production server
+   - To use local backend, update `BACKEND_URL` in `frontend/js/shared.js` to `http://localhost:5009`
+
+**Live URLs:**
+- **Frontend**: [https://benevolent-phoenix-c10ecb.netlify.app](https://benevolent-phoenix-c10ecb.netlify.app)
+- **Backend API**: [https://recipe-backenddeploy.onrender.com](https://recipe-backenddeploy.onrender.com)
 
 ## 📚 API Endpoints
 
